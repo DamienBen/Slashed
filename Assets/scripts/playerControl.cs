@@ -12,8 +12,8 @@ public class playerControl : MonoBehaviour
 {
 
 	private		PlayerState _playerState;
-	public 		float speed = 2120;
-
+	private 	Vector3 	_moveDirection = Vector3.zero;
+	private		float		_speed = 5.0F;
 
 	void Start () 
 	{
@@ -23,33 +23,41 @@ public class playerControl : MonoBehaviour
 
 	void Update () 
 	{
-		Debug.Log(transform.position.x);
+		CharacterController controller = GetComponent<CharacterController>();
+		_moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		_moveDirection = transform.TransformDirection(_moveDirection);
+		//Multiply it by speed.
+		_moveDirection *= _speed;
 
-
+	
+		//Debug.Log(transform.position.x);
 	//	float x = Input.GetAxis("Horizontal") * Time.smoothDeltaTime * speed;
 	//	float y = Input.GetAxis("Vertical") * Time.smoothDeltaTime * speed;
 	//	transform.Translate(x,0,0/*y*/,/*Space.Self*/0);
 	
 
-		if (Input.GetKeyDown ("left") && _playerState != PlayerState.left)
+		if (Input.GetKeyDown ("left"))
 		{
-			_playerState = PlayerState.left;		
-			transform.Rotate (0, 180, 0);
-		//	transform.Translate( - (Vector3.left * 100.0f * Time.smoothDeltaTime));
+			if (_playerState != PlayerState.left)
+				transform.Rotate (0, 180, 0);
+			_playerState = PlayerState.left;
+			_moveDirection.x -=  100;
 
-			//a test
-			/*
-			transform.position = new Vector3(0, 0, 0);
-			print(transform.position.x);
-			*/
+		//	transform.Translate(2, 0, 0, Space.Self);
+
 		}
-		if (Input.GetKeyDown ("right") && _playerState != PlayerState.right)
+		if (Input.GetKeyDown ("right"))
 		{
+			if (_playerState != PlayerState.right)
+				transform.Rotate (0, 180, 0);
 			_playerState = PlayerState.right;
-			transform.Rotate (0, 180, 0);
-		//	transform.Translate(Vector3.right * 100.0f * Time.smoothDeltaTime );
-		//	transform.position = new Vector3(1, 0, 0f);
-	
+			_moveDirection.x +=  100;
+
+		//	transform.Translate(2, 0, 0, Space.Self);	
 		}
+
+		controller.Move(_moveDirection * Time.deltaTime);
+
+		//print (_lfSpeed + "/" + d.x);
 	}
 }
