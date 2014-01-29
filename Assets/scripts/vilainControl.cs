@@ -4,8 +4,8 @@ using System.Collections;
 public class vilainControl : MonoBehaviour
 {
 	private 	float 				_speed = 0.08f;
-	private 	float				_localGravity = 0.0F;
-	private		bool				_applyGravity = true;
+	private		bool				_isLanded = false;
+	private		bool				_wasHitted = false;
 	
 	void Start () 
 	{
@@ -16,45 +16,63 @@ public class vilainControl : MonoBehaviour
 		}
 	}
 
-	void Update () 
+	void FixedUpdate () 
 	{
-	
-		if (_applyGravity) 
-			_localGravity -= 9.81f * Time.deltaTime;
-		else
-			_localGravity = 0;
 
-		Vector3 tmp = new Vector3 (_speed, _localGravity * Time.deltaTime, 0);	
-		transform.position += tmp;
-		
-		if (transform.position.y > 0.0f)
-			_applyGravity = true;
-		else
-		{
-			// WHY WITH POSITION > 0
-			transform.position =  new Vector3(transform.position.x, 0, transform.position.z);
+		if (_speed > 0 && _isLanded)
+			rigidbody2D.AddForce(new Vector2 (200, 0));
+		else if (_isLanded)
+			rigidbody2D.AddForce(new Vector2 (-200, 0));
 
-			}
-		//Debug.Log (_localGravity);
 	}
 
 	void OnCollisionEnter2D (Collision2D col)
 	{
-		/*if(col.gameObject.name == "vilain")
-		{}*/
-	//		Destroy(col.gameObject);
-		//rigidbody2D.AddForce(transform.forward * 100);
-		if (col.gameObject.name == "groundGravity")
-			_applyGravity = false;
-		
-		if (_speed > 0) 
-			rigidbody2D.velocity = new Vector2 (-10, 1);
-		else 
+
+		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilain(Clone)") 
 		{
-			rigidbody2D.velocity = new Vector2 (10, 1);
-		}
-		//Debug.Log ("i hit" + col.gameObject.name );
+			_wasHitted = true;
+						if (_speed > 0 && _isLanded) {
+				_isLanded = false;
+								rigidbody2D.AddForce (new Vector2 (-3500, 1500));
+						} else if (_isLanded) {
+				_isLanded = false;
+								rigidbody2D.AddForce (new Vector2 (3500, 1500));
+						}
+				} else if (col.gameObject.name == "groundGravity") {
+					
+			if (_wasHitted)
+				Destroy(gameObject);
+						_isLanded = true;
+				}
+
 	}
 
+
+
+	
+	void OnTriggerEnter2D (Collider2D col)
+	{
+		
+		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilain(Clone)") 
+		{
+			_wasHitted = true;
+			if (_speed > 0 && _isLanded) {
+				_isLanded = false;
+				rigidbody2D.AddForce (new Vector2 (-4500, 1500));
+			} else if (_isLanded) {
+				_isLanded = false;
+				rigidbody2D.AddForce (new Vector2 (4500, 1500));
+			}
+		} else if (col.gameObject.name == "groundGravity") {
+			
+			if (_wasHitted)
+				Destroy(gameObject);
+			_isLanded = true;
+		}
+
+			
+			
+		}
 
 }

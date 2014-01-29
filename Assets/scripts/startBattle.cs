@@ -11,6 +11,8 @@ public class startBattle : MonoBehaviour
 		StartCoroutine (VilainSpawn());
 	}
 
+
+
 	IEnumerator VilainSpawn()
 	{
 		while(true)
