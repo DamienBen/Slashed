@@ -2,9 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/startBattle.cs">
     <Files>
-      <File FileName="Assets/scripts/playerControl.cs" Line="61" Column="18" />
-      <File FileName="Assets/scripts/startBattle.cs" Line="11" Column="3" />
-      <File FileName="Assets/scripts/vilainControl.cs" Line="10" Column="16" />
+      <File FileName="Assets/scripts/backgroundLoop.cs" Line="8" Column="3" />
+      <File FileName="Assets/scripts/startBattle.cs" Line="21" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
