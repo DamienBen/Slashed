@@ -3,7 +3,7 @@ using System.Collections;
 
 public class vilainControl : MonoBehaviour
 {
-	private 	float 				_speed = 0.08f;
+	private 	float 				_speed = 1.0f;
 	private		bool				_isLanded = false;
 	private		bool				_wasHitted = false;
 	
@@ -20,9 +20,9 @@ public class vilainControl : MonoBehaviour
 	{
 
 		if (_speed > 0 && _isLanded)
-			rigidbody2D.AddForce(new Vector2 (200, 0));
+			rigidbody2D.AddForce(new Vector2 (250, 0));
 		else if (_isLanded)
-			rigidbody2D.AddForce(new Vector2 (-200, 0));
+			rigidbody2D.AddForce(new Vector2 (-250, 0));
 
 	}
 

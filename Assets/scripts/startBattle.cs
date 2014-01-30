@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
+
 public class startBattle : MonoBehaviour 
 {
 
-	public 	GameObject vilain;
-	public 	GameObject background;
-	public 	GameObject backgroundLeft;
-	public 	GameObject backgroundRight;
-	public	float		backgroundWidth;
-	public float speed = 10f;
+	public 	GameObject 			vilain;	
+	public 	GameObject 			background;
+	public 	GameObject 			backgroundLeft;
+	public 	GameObject			backgroundRight;
+	public	float				backgroundWidth;
+	public 	float 				speed = 10f;
+	private	GameObject[]		_backgroundArray;
+	private int					_currentBackground;
 
 
 	void Start ()
@@ -20,6 +25,12 @@ public class startBattle : MonoBehaviour
 		Vector3 v2 = new Vector3 (background.transform.position.x - backgroundWidth, background.transform.position.y, background.transform.position.z);
 		backgroundRight = (GameObject)Instantiate (background, v, Quaternion.identity);
 		backgroundLeft = (GameObject)Instantiate(background, v2, Quaternion.identity);
+
+		_currentBackground = 1;
+		_backgroundArray = new GameObject[3];
+		_backgroundArray [0] = backgroundLeft;
+		_backgroundArray [1] = background;
+		_backgroundArray [2] = backgroundRight;
 	}
 
 	void Update()
@@ -28,20 +39,56 @@ public class startBattle : MonoBehaviour
 		transform.position = new Vector3 (p.transform.position.x, transform.position.y, transform.position.z);
 
 
-	
-		if (transform.position.x > 0) 
-		{
-			if (transform.position.x > backgroundRight.transform.position.x)
-				backgroundLeft.transform.position = new Vector3(background.transform.position.x + backgroundWidth * 2,backgroundRight.transform.position.y );
-		}
-		else
-		{
-			if (transform.position.x < backgroundLeft.transform.position.x)
-				backgroundRight.transform.position = new Vector3(background.transform.position.x - backgroundWidth * 2,backgroundLeft.transform.position.y );
 
-		}
+		InfiniteBackground ();
+
 	}
 
+	void InfiniteBackground()
+	{
+		int decalLeft = 0;
+		int decalRight = 0;
+
+		if (transform.position.x > _backgroundArray [_currentBackground].transform.position.x + backgroundWidth / 2) 
+		{
+			
+			
+			if (_currentBackground == 0) {
+				decalLeft = 2;
+				decalRight = 1;
+				_currentBackground ++;
+			} else if (_currentBackground == _backgroundArray.Length - 1) {
+				decalLeft = 1;
+				decalRight = 0;
+				_currentBackground = 0;
+			} else {
+				decalLeft = _currentBackground - 1;
+				decalRight = _currentBackground + 1;
+				_currentBackground ++;
+			}
+			_backgroundArray [decalLeft].transform.position = new Vector3 (_backgroundArray [decalRight].transform.position.x + backgroundWidth, backgroundRight.transform.position.y);
+			
+		} 
+		else if(transform.position.x < _backgroundArray [_currentBackground].transform.position.x - backgroundWidth / 2)
+		{		
+			
+			if (_currentBackground == 0) {
+				decalLeft = 2;
+				decalRight = 1;
+				_currentBackground = _backgroundArray.Length - 1;
+			} else if (_currentBackground == _backgroundArray.Length - 1) {
+				decalLeft = 1;
+				decalRight = 0;
+				_currentBackground --;
+			} else {
+				decalLeft = _currentBackground - 1;
+				decalRight = _currentBackground + 1;
+				_currentBackground --;
+			}		
+			_backgroundArray [decalRight].transform.position = new Vector3 (_backgroundArray [decalLeft].transform.position.x - backgroundWidth, backgroundRight.transform.position.y);
+		}
+
+	}
 
 	IEnumerator VilainSpawn()
 	{
@@ -65,7 +112,7 @@ public class startBattle : MonoBehaviour
 			Instantiate (vilain, v, Quaternion.identity); 
 
 			
-			yield return new WaitForSeconds(4.6f);
+			yield return new WaitForSeconds(0.8f);
 
 		}
 	}
