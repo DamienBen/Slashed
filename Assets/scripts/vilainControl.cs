@@ -6,7 +6,7 @@ public class vilainControl : MonoBehaviour
 	private 	float 				_speed = 1.0f;
 	private		bool				_isLanded = false;
 	private		bool				_wasHitted = false;
-	
+
 	void Start () 
 	{
 		if (transform.position.x > 1)
@@ -53,8 +53,15 @@ public class vilainControl : MonoBehaviour
 	
 	void OnTriggerEnter2D (Collider2D col)
 	{
-		
-		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilain(Clone)") 
+		if (col.gameObject.name == "trigRight") 
+		{
+			Debug.Log("ENEMY COME FROM RIGHT");
+		}
+		else if (col.gameObject.name == "trigLeft") 
+		{
+			Debug.Log("ENEMY COME FROM LEFT");
+		}
+		else if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilain(Clone)" && col.gameObject.name != "trigRight" && col.gameObject.name != "trigLeft") 
 		{
 			_wasHitted = true;
 			if (_speed > 0 && _isLanded) {

@@ -15,6 +15,8 @@ public class startBattle : MonoBehaviour
 	public 	float 				speed = 10f;
 	private	GameObject[]		_backgroundArray;
 	private int					_currentBackground;
+	public	GameObject			trigLeft;
+	public	GameObject			trigRight;
 
 
 	void Start ()
@@ -25,6 +27,7 @@ public class startBattle : MonoBehaviour
 		Vector3 v2 = new Vector3 (background.transform.position.x - backgroundWidth, background.transform.position.y, background.transform.position.z);
 		backgroundRight = (GameObject)Instantiate (background, v, Quaternion.identity);
 		backgroundLeft = (GameObject)Instantiate(background, v2, Quaternion.identity);
+
 
 		_currentBackground = 1;
 		_backgroundArray = new GameObject[3];
@@ -37,10 +40,10 @@ public class startBattle : MonoBehaviour
 	{
 		GameObject p = GameObject.Find ("player");
 		transform.position = new Vector3 (p.transform.position.x, transform.position.y, transform.position.z);
-
-
-
+		trigLeft.transform.position = new Vector3(p.transform.position.x - 2.5F, trigLeft.transform.position.y, trigLeft.transform.position.z);
+		trigRight.transform.position = new Vector3(p.transform.position.x + 2.5F, trigLeft.transform.position.y, trigLeft.transform.position.z);
 		InfiniteBackground ();
+	
 
 	}
 
@@ -105,10 +108,7 @@ public class startBattle : MonoBehaviour
 				else
 					sSide *= -1;
 			}
-
 			Vector3 v = new Vector3(sSide,0,0);
-		
-
 			Instantiate (vilain, v, Quaternion.identity); 
 
 			

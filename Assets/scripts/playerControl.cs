@@ -80,7 +80,6 @@ public class playerControl : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D collision)
 	{
-		
 		rigidbody2D.velocity = new Vector2 (0, 0);
 		//	Debug.Log (collision.gameObject.name );
 		/*if (collision.gameObject.name != "groundGravity")
