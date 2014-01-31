@@ -12,15 +12,14 @@ public class playerControl : MonoBehaviour
 {
 
 	private		PlayerState 		_playerState;
-	private		float				_playerDestination = 0.0F;
-	private 	float				_localGravity = 0.0F;
-	private		bool				_applyGravity = true;
 
 
 	void Start () 
 	{
 		_playerState = PlayerState.right;
+
 	}
+
 
 	
 
@@ -28,8 +27,12 @@ public class playerControl : MonoBehaviour
 	{
 		//if(rigidbody2D.velocity.x != 0)
 
-
-		if (Input.GetKeyDown ("left"))
+		/*if (vilainControl.leftTrig)
+			Debug.Log ("LEFT");
+		if (vilainControl.rightTrig)
+			Debug.Log ("RIGHT");
+*/
+		if (Input.GetKeyDown ("left") && vilainControl.leftTrig)
 		{
 			if (_playerState != PlayerState.left)
 				transform.Rotate (0, 180, 0);
@@ -39,7 +42,7 @@ public class playerControl : MonoBehaviour
 			rigidbody2D.velocity = new Vector2 (-30, 0);
 		}
 
-		if (Input.GetKeyDown ("right"))
+		if (Input.GetKeyDown ("right") && vilainControl.rightTrig)
 		{
 			if (_playerState != PlayerState.right)
 				transform.Rotate (0, 180, 0);
@@ -84,7 +87,8 @@ public class playerControl : MonoBehaviour
 		//	Debug.Log (collision.gameObject.name );
 		/*if (collision.gameObject.name != "groundGravity")
 		{
-			collision.gameObject.rigidbody2D.velocity = new Vector2 (10000, 0);
+			//collision.transform.gameObject.rigidbody2D.velocity = new Vector3(-50, 30, 0);
+			//collision.gameObject.rigidbody2D.velocity = new Vector2 (10000, 0);
 		//	collision.gameObject.rigidbody2D.AddForce(new Vector2(3000,100));
 		
 		}*/
