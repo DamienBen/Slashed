@@ -12,7 +12,7 @@ public class vilainControl : MonoBehaviour
 	public static	bool				rightTrig = false;
 	private			float				_grHorizontal = 0.0F;
 	private			float				_grVertical = 0.0F;
-
+	private			Animator 			_rightAnimator, _leftAnimator;
 	void Start () 
 	{
 		if (transform.position.x > 1)
@@ -76,11 +76,16 @@ public class vilainControl : MonoBehaviour
 	{
 		if (col.gameObject.name == "trigRight") 
 		{
+
+			_rightAnimator = col.GetComponent<Animator>();
+			_rightAnimator.SetBool("trigRight", true);		
 			rightTrig = true;
 			//need to animate trigger bar
 		}
 		else if (col.gameObject.name == "trigLeft") 
 		{
+			_leftAnimator = col.GetComponent<Animator>();
+			_leftAnimator.SetBool("trigLeft", true);		
 			leftTrig = true;
 		//need to animate trigger bar
 		}
@@ -90,17 +95,23 @@ public class vilainControl : MonoBehaviour
 			_wasHitted = true;
 			leftTrig = false;
 			rightTrig = false;
-			StartCoroutine (destroyVilain());
+			StartCoroutine (destroyVilain(col));
 			_isLanded = false;
 
 		} 
 	}
 
-	IEnumerator destroyVilain() 
+	IEnumerator destroyVilain(Collider2D col) 
 	{
+
+		if (_speed < 0)
+			_rightAnimator.SetBool("trigRight", false);		
+		else
+			_leftAnimator .SetBool("trigLeft", false);		
+
 		//rigidbody2D.isKinematic = true;
 		gameObject.collider2D.enabled = false;
-		yield return new WaitForSeconds(0.9f);
+		yield return new WaitForSeconds(0.8f);
 		Destroy(gameObject);
 	}
 

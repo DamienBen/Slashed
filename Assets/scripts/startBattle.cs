@@ -40,8 +40,8 @@ public class startBattle : MonoBehaviour
 	{
 		GameObject p = GameObject.Find ("player");
 		transform.position = new Vector3 (p.transform.position.x, transform.position.y, transform.position.z);
-		trigLeft.transform.position = new Vector3(p.transform.position.x - 2.5F, trigLeft.transform.position.y, trigLeft.transform.position.z);
-		trigRight.transform.position = new Vector3(p.transform.position.x + 2.5F, trigLeft.transform.position.y, trigLeft.transform.position.z);
+		trigLeft.transform.position = new Vector3(p.transform.position.x - 2.9F, trigLeft.transform.position.y, trigLeft.transform.position.z);
+		trigRight.transform.position = new Vector3(p.transform.position.x + 2.9F, trigLeft.transform.position.y, trigLeft.transform.position.z);
 		InfiniteBackground ();
 	
 
