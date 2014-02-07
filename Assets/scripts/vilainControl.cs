@@ -30,9 +30,9 @@ public class vilainControl : MonoBehaviour
 		{
 						
 			if (_speed > 0)
-					rigidbody2D.AddForce (new Vector2 (250, 0));
+					rigidbody2D.AddForce (new Vector2 (450, 0));
 						else
-				rigidbody2D.AddForce (new Vector2 (-250, 0));
+				rigidbody2D.AddForce (new Vector2 (-450, 0));
 		} 
 		else
 		{
@@ -57,7 +57,7 @@ public class vilainControl : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D col)
 	{
 
-		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilain(Clone)") 
+		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilainRunZ(Clone)") 
 		{
 			_wasHitted = true;
 		
@@ -74,6 +74,7 @@ public class vilainControl : MonoBehaviour
 	
 	void OnTriggerEnter2D (Collider2D col)
 	{
+
 		if (col.gameObject.name == "trigRight") 
 		{
 
@@ -90,7 +91,7 @@ public class vilainControl : MonoBehaviour
 		//need to animate trigger bar
 		}
 
-		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilain(Clone)" && col.gameObject.name != "trigRight" && col.gameObject.name != "trigLeft") 
+		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilainRunZ(Clone)" && col.gameObject.name != "trigRight" && col.gameObject.name != "trigLeft") 
 		{
 			_wasHitted = true;
 			leftTrig = false;

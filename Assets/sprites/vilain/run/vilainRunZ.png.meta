@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: 49fded573b2024bda94cb66b62c3ff46
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: vilainRunZ_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 55
+        width: 431
+        height: 493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_1
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 55
+        width: 431
+        height: 492
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_2
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 55
+        width: 404
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_3
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 55
+        width: 404
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_4
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 55
+        width: 406
+        height: 474
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_5
+      rect:
+        serializedVersion: 2
+        x: 2266
+        y: 55
+        width: 406
+        height: 474
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_6
+      rect:
+        serializedVersion: 2
+        x: 2712
+        y: 55
+        width: 352
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_7
+      rect:
+        serializedVersion: 2
+        x: 3158
+        y: 55
+        width: 352
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_8
+      rect:
+        serializedVersion: 2
+        x: 3574
+        y: 55
+        width: 410
+        height: 488
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_9
+      rect:
+        serializedVersion: 2
+        x: 4013
+        y: 55
+        width: 396
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_10
+      rect:
+        serializedVersion: 2
+        x: 4459
+        y: 55
+        width: 396
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_11
+      rect:
+        serializedVersion: 2
+        x: 4942
+        y: 55
+        width: 383
+        height: 476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_12
+      rect:
+        serializedVersion: 2
+        x: 5388
+        y: 55
+        width: 383
+        height: 476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_13
+      rect:
+        serializedVersion: 2
+        x: 5834
+        y: 55
+        width: 381
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_14
+      rect:
+        serializedVersion: 2
+        x: 6280
+        y: 55
+        width: 381
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: vilainRunZ_15
+      rect:
+        serializedVersion: 2
+        x: 6710
+        y: 55
+        width: 426
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 
