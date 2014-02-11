@@ -21,6 +21,11 @@ public class startBattle : MonoBehaviour
 
 	void Start ()
 	{
+
+		//particleSystem.renderer.sortingLayerName = "player";
+
+
+
 		StartCoroutine (VilainSpawn());
 		backgroundWidth = background.renderer.bounds.size.x;
 		Vector3 v = new Vector3 (background.transform.position.x +backgroundWidth, background.transform.position.y, background.transform.position.z);
@@ -38,6 +43,7 @@ public class startBattle : MonoBehaviour
 
 	void Update()
 	{
+
 		GameObject p = GameObject.Find ("player");
 		transform.position = new Vector3 (p.transform.position.x, transform.position.y, transform.position.z);
 		trigLeft.transform.position = new Vector3(p.transform.position.x - 2.0F, trigLeft.transform.position.y, trigLeft.transform.position.z);
@@ -108,11 +114,11 @@ public class startBattle : MonoBehaviour
 				else
 					sSide *= -1;
 			}
-			Vector3 v = new Vector3(sSide,0,0);
+			Vector3 v = new Vector3(sSide,0.5f ,0);
 			Instantiate (vilain, v, Quaternion.identity); 
 
 			
-			yield return new WaitForSeconds(0.8f);
+			yield return new WaitForSeconds(0.65f);
 
 		}
 	}

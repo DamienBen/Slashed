@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/vilainControl.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/playerControl.cs">
     <Files>
-      <File FileName="Assets/scripts/playerControl.cs" Line="47" Column="53" />
-      <File FileName="Assets/scripts/vilainControl.cs" Line="53" Column="4" />
-      <File FileName="Assets/scripts/startBattle.cs" Line="100" Column="39" />
+      <File FileName="Assets/scripts/playerControl.cs" Line="96" Column="6" />
+      <File FileName="Assets/scripts/vilainControl.cs" Line="121" Column="41" />
+      <File FileName="Assets/scripts/startBattle.cs" Line="24" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

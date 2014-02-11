@@ -4,42 +4,45 @@ using System.Collections;
 enum PlayerState
 {
 	left,
-	right,
-	hit
+	right
+
 };
 
 public class playerControl : MonoBehaviour
 {
 
-	private		PlayerState 		_playerState;
-	private		Animator 			_strikeFirstAnimator;
-
+	private			PlayerState 		_playerState;
+	private			Animator 			_strikeFirstAnimator;
+	public	static	bool				isStriking;	
 
 	void Start () 
 	{
-		_playerState = PlayerState.right;
+
+		playerControl.isStriking = false;
+			_playerState = PlayerState.right;
 		_strikeFirstAnimator = GetComponent<Animator>();
 
 	}
 
 
-	
+
 
 	void Update () 
 	{
-		//if(rigidbody2D.velocity.x != 0)
 
-		/*if (vilainControl.leftTrig)
-			Debug.Log ("LEFT");
-		if (vilainControl.rightTrig)
-			Debug.Log ("RIGHT");
-*/
-
+		//		Debug.Log (_strikeFirstAnimatorhit.GetCurrentAnimatorStateInfo(0).IsTag("strikeFirst"));
 	
-		if (!_strikeFirstAnimator.IsInTransition(0))
-			_strikeFirstAnimator.SetBool("strikeFirst", false);
+		if (!_strikeFirstAnimator.IsInTransition (0)) 
+		{
+	
+			_strikeFirstAnimator.SetBool ("strikeFirst", false);
+		
+		}
+
+
 		if (Input.GetKeyDown ("left") && vilainControl.leftTrig)
 		{
+			playerControl.isStriking = true;
 			if (_playerState != PlayerState.left)
 				transform.Rotate (0, 180, 0);
 			_strikeFirstAnimator.SetBool("strikeFirst", true);
@@ -51,10 +54,7 @@ public class playerControl : MonoBehaviour
 	
 		if (Input.GetKeyDown ("right") && vilainControl.rightTrig)
 		{
-
-
-
-
+			playerControl.isStriking = true;
 			if (_playerState != PlayerState.right)
 				transform.Rotate (0, 180, 0);
 			_strikeFirstAnimator.SetBool("strikeFirst", true);
@@ -71,11 +71,11 @@ public class playerControl : MonoBehaviour
 	}
 
 
-
+		
+		
 	void OnCollisionEnter2D (Collision2D collision)
-	{
-
-		rigidbody2D.velocity = new Vector2 (0, 0);
+		{
+			rigidbody2D.velocity = new Vector2 (0, 0);
 	//	Debug.Log (collision.gameObject.name );
 		/*if (collision.gameObject.name != "groundGravity")
 		{
@@ -92,10 +92,11 @@ public class playerControl : MonoBehaviour
 	}
 
 
-	void OnTriggerEnter2D (Collider2D collision)
+void OnTriggerEnter2D (Collider2D collision)
 	{
+
 		rigidbody2D.velocity = new Vector2 (0, 0);
-		//	Debug.Log (collision.gameObject.name );
+
 		/*if (collision.gameObject.name != "groundGravity")
 		{
 			//collision.transform.gameObject.rigidbody2D.velocity = new Vector3(-50, 30, 0);

@@ -13,8 +13,12 @@ public class vilainControl : MonoBehaviour
 	private			float				_grHorizontal = 0.0F;
 	private			float				_grVertical = 0.0F;
 	private			Animator 			_rightAnimator, _leftAnimator;
+	private			Animator 			_vilainAnimator;
+
 	void Start () 
 	{
+
+		_vilainAnimator = GetComponent<Animator>();
 		if (transform.position.x > 1)
 		{
 			_speed *= -1;
@@ -23,12 +27,14 @@ public class vilainControl : MonoBehaviour
 	}
 
 
-
-	void FixedUpdate () 
+	void Update () 
 	{
+
+
+		Debug.Log (_grVertical);
 		if (_isLanded)
 		{
-						
+	
 			if (_speed > 0)
 					rigidbody2D.AddForce (new Vector2 (450, 0));
 						else
@@ -36,20 +42,17 @@ public class vilainControl : MonoBehaviour
 		} 
 		else
 		{
-			//making a raneg random coeficien for random
 			_grHorizontal += 0.25F;
-			_grVertical += 0.05F;
+			_grVertical += 0.15F;
 
 			if (_speed > 0)
-			{
-				rigidbody2D.velocity = new Vector3(-1.4F + _grHorizontal, 2.5F - _grVertical, 0);
-				rigidbody2D.AddForce (new Vector2 (-400, 0));
-			}
+				rigidbody2D.velocity = new Vector3(-12.4F + _grHorizontal, 2.9F - _grVertical, 0);
 			else
-			{
-				rigidbody2D.velocity = new Vector3(1.4F - _grHorizontal, 2.5F - _grVertical, 0);
-				rigidbody2D.AddForce (new Vector2 (400, 0));
-			}
+				rigidbody2D.velocity = new Vector3(12.4F - _grHorizontal, 2.9F - _grVertical, 0);
+
+			if (!playerControl.isStriking)
+					rigidbody2D.AddForce (new Vector2 (0, 0));
+
 		}
 
 	}
@@ -64,6 +67,7 @@ public class vilainControl : MonoBehaviour
 		} 
 		else if (col.gameObject.name == "groundGravity")
 		{
+
 			_isLanded = true;
 		}
 
@@ -71,7 +75,6 @@ public class vilainControl : MonoBehaviour
 
 
 
-	
 	void OnTriggerEnter2D (Collider2D col)
 	{
 
@@ -81,38 +84,72 @@ public class vilainControl : MonoBehaviour
 			_rightAnimator = col.GetComponent<Animator>();
 			_rightAnimator.SetBool("trigRight", true);		
 			rightTrig = true;
-			//need to animate trigger bar
+
 		}
 		else if (col.gameObject.name == "trigLeft") 
 		{
 			_leftAnimator = col.GetComponent<Animator>();
 			_leftAnimator.SetBool("trigLeft", true);		
 			leftTrig = true;
-		//need to animate trigger bar
+
 		}
 
 		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilainRunZ(Clone)" && col.gameObject.name != "trigRight" && col.gameObject.name != "trigLeft") 
 		{
 			_wasHitted = true;
-			leftTrig = false;
-			rightTrig = false;
-			StartCoroutine (destroyVilain(col));
 			_isLanded = false;
+
+
+			if (playerControl.isStriking)
+			{
+				leftTrig = false;
+				rightTrig = false;
+				StartCoroutine (destroyVilain(col));
+				_vilainAnimator.SetBool("vilainStrike", false);
+				playerControl.isStriking = false;
+			}
+			else
+			{
+				_vilainAnimator.SetBool("vilainStrike", true);
+			}
+
 
 		} 
 	}
 
-	IEnumerator destroyVilain(Collider2D col) 
-	{
 
+	void datEject()
+	{
 		if (_speed < 0)
 			_rightAnimator.SetBool("trigRight", false);		
 		else
 			_leftAnimator .SetBool("trigLeft", false);		
+		
+		rigidbody2D.isKinematic = true;
 
-		//rigidbody2D.isKinematic = true;
+		
+		/*if (_speed > 0)
+		{
+			rigidbody2D.velocity = new Vector3(-2.4F + _grHorizontal, 2.5F - _grVertical, 0);
+			//rigidbody2D.AddForce (new Vector2 (-400, 0));
+		}
+		else
+		{
+			rigidbody2D.velocity = new Vector3(2.4F - _grHorizontal, 2.5F - _grVertical, 0);
+			//rigidbody2D.AddForce (new Vector2 (400, 0));
+		}*/
+		_vilainAnimator.SetBool("vilainHit", true);
 		gameObject.collider2D.enabled = false;
-		yield return new WaitForSeconds(0.8f);
+
+	}
+
+
+	IEnumerator destroyVilain(Collider2D col) 
+	{
+
+		datEject ();
+			
+		yield return new WaitForSeconds(0.7f);
 		Destroy(gameObject);
 	}
 
