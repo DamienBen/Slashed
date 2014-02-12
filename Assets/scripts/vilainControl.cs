@@ -29,9 +29,7 @@ public class vilainControl : MonoBehaviour
 
 	void Update () 
 	{
-
-
-		Debug.Log (_grVertical);
+		//Debug.Log (_grHorizontal);
 		if (_isLanded)
 		{
 	
@@ -40,7 +38,7 @@ public class vilainControl : MonoBehaviour
 						else
 				rigidbody2D.AddForce (new Vector2 (-450, 0));
 		} 
-		else
+		else if (_vilainAnimator.GetBool("vilainHit"))
 		{
 			_grHorizontal += 0.25F;
 			_grVertical += 0.15F;
@@ -51,7 +49,7 @@ public class vilainControl : MonoBehaviour
 				rigidbody2D.velocity = new Vector3(12.4F - _grHorizontal, 2.9F - _grVertical, 0);
 
 			if (!playerControl.isStriking)
-					rigidbody2D.AddForce (new Vector2 (0, 0));
+				rigidbody2D.AddForce (new Vector2 (0, 0));
 
 		}
 
@@ -61,15 +59,10 @@ public class vilainControl : MonoBehaviour
 	{
 
 		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilainRunZ(Clone)") 
-		{
-			_wasHitted = true;
-		
-		} 
+			_wasHitted = true;		
 		else if (col.gameObject.name == "groundGravity")
-		{
-
 			_isLanded = true;
-		}
+	
 
 	}
 
@@ -94,32 +87,35 @@ public class vilainControl : MonoBehaviour
 
 		}
 
-		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilainRunZ(Clone)" && col.gameObject.name != "trigRight" && col.gameObject.name != "trigLeft") 
-		{
-			_wasHitted = true;
-			_isLanded = false;
+		if (col.gameObject.name != "groundGravity" && col.gameObject.name != "vilainRunZ(Clone)" && col.gameObject.name != "trigRight" && col.gameObject.name != "trigLeft") {
+						_wasHitted = true;
+						_isLanded = false;
 
 
-			if (playerControl.isStriking)
-			{
-				leftTrig = false;
-				rightTrig = false;
-				StartCoroutine (destroyVilain(col));
-				_vilainAnimator.SetBool("vilainStrike", false);
-				playerControl.isStriking = false;
-			}
-			else
-			{
-				_vilainAnimator.SetBool("vilainStrike", true);
-			}
+						if (playerControl.isStriking) {
+								leftTrig = false;
+								rightTrig = false;
+								StartCoroutine (destroyVilain (col));
+								_vilainAnimator.SetBool ("vilainStrike", false);
+								playerControl.isStriking = false;
+
+						} else {
+
+								playerControl.playerAnimator.SetBool ("playerHit", true);
+								_vilainAnimator.SetBool ("vilainStrike", true);
+
+						}
 
 
-		} 
+				} 
+				
 	}
 
 
 	void datEject()
 	{
+
+
 		if (_speed < 0)
 			_rightAnimator.SetBool("trigRight", false);		
 		else
@@ -128,16 +124,7 @@ public class vilainControl : MonoBehaviour
 		rigidbody2D.isKinematic = true;
 
 		
-		/*if (_speed > 0)
-		{
-			rigidbody2D.velocity = new Vector3(-2.4F + _grHorizontal, 2.5F - _grVertical, 0);
-			//rigidbody2D.AddForce (new Vector2 (-400, 0));
-		}
-		else
-		{
-			rigidbody2D.velocity = new Vector3(2.4F - _grHorizontal, 2.5F - _grVertical, 0);
-			//rigidbody2D.AddForce (new Vector2 (400, 0));
-		}*/
+		playerControl.playerAnimator.SetBool("playerHit", false);
 		_vilainAnimator.SetBool("vilainHit", true);
 		gameObject.collider2D.enabled = false;
 
@@ -148,7 +135,9 @@ public class vilainControl : MonoBehaviour
 	{
 
 		datEject ();
-			
+
+		yield return new WaitForSeconds(0.25f);
+		playerControl.playerAnimator.SetBool("strikeFirst", false);
 		yield return new WaitForSeconds(0.7f);
 		Destroy(gameObject);
 	}

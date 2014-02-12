@@ -11,19 +11,20 @@ enum PlayerState
 public class playerControl : MonoBehaviour
 {
 
-	private			PlayerState 		_playerState;
-	private			Animator 			_strikeFirstAnimator;
-	public	static	bool				isStriking;	
+	private					PlayerState 		_playerState;
+	public 	static			Animator 			playerAnimator;
+	public	static			bool				isStriking;	
+
+
 
 	void Start () 
 	{
 
 		playerControl.isStriking = false;
 			_playerState = PlayerState.right;
-		_strikeFirstAnimator = GetComponent<Animator>();
+		playerAnimator = GetComponent<Animator>();
 
 	}
-
 
 
 
@@ -32,20 +33,21 @@ public class playerControl : MonoBehaviour
 
 		//		Debug.Log (_strikeFirstAnimatorhit.GetCurrentAnimatorStateInfo(0).IsTag("strikeFirst"));
 	
-		if (!_strikeFirstAnimator.IsInTransition (0)) 
-		{
-	
-			_strikeFirstAnimator.SetBool ("strikeFirst", false);
-		
-		}
+	/*	if (!playerAnimator.IsInTransition (0)) 
+			playerAnimator.SetBool ("strikeFirst", false);
+	*/	
 
+		if (playerAnimator.GetBool("strikeFirst"))
+			transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
+		else
+			transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
 
 		if (Input.GetKeyDown ("left") && vilainControl.leftTrig)
 		{
 			playerControl.isStriking = true;
 			if (_playerState != PlayerState.left)
 				transform.Rotate (0, 180, 0);
-			_strikeFirstAnimator.SetBool("strikeFirst", true);
+			playerAnimator.SetBool("strikeFirst", true);
 			_playerState = PlayerState.left;
 		//	rigidbody2D.AddForce(new Vector2 (-150000, 0));
 			rigidbody2D.velocity = new Vector2 (-30, 0);
@@ -57,7 +59,8 @@ public class playerControl : MonoBehaviour
 			playerControl.isStriking = true;
 			if (_playerState != PlayerState.right)
 				transform.Rotate (0, 180, 0);
-			_strikeFirstAnimator.SetBool("strikeFirst", true);
+			transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+			playerAnimator.SetBool("strikeFirst", true);
 			_playerState = PlayerState.right;
 			rigidbody2D.velocity = new Vector2 (30, 0);
 		//	rigidbody2D.AddForce(new Vector2 (150000, 0));
@@ -75,6 +78,7 @@ public class playerControl : MonoBehaviour
 		
 	void OnCollisionEnter2D (Collision2D collision)
 		{
+
 			rigidbody2D.velocity = new Vector2 (0, 0);
 	//	Debug.Log (collision.gameObject.name );
 		/*if (collision.gameObject.name != "groundGravity")
@@ -96,6 +100,25 @@ void OnTriggerEnter2D (Collider2D collision)
 	{
 
 		rigidbody2D.velocity = new Vector2 (0, 0);
+
+		//Debug.Log (transform.position.x + "/" + collision.gameObject.transform.position.x);
+
+		if (!playerAnimator.GetBool("strikeFirst"))
+		{
+			if (transform.position.x > collision.gameObject.transform.position.x)
+			{
+				if (_playerState != PlayerState.left)
+					transform.Rotate (0, 180, 0);
+				_playerState = PlayerState.left;
+			}
+			else
+			{
+				if (_playerState != PlayerState.right)
+					transform.Rotate (0, 180, 0);
+				_playerState = PlayerState.right;
+			}
+				
+		}
 
 		/*if (collision.gameObject.name != "groundGravity")
 		{

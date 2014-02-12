@@ -50,9 +50,9 @@ public class startBattle : MonoBehaviour
 		trigRight.transform.position = new Vector3(p.transform.position.x + 2.0F, trigLeft.transform.position.y, trigLeft.transform.position.z);
 		InfiniteBackground ();
 	
-
+	
 	}
-
+	
 	void InfiniteBackground()
 	{
 		int decalLeft = 0;
