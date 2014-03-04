@@ -64,7 +64,9 @@ public class startBattle : MonoBehaviour
 	
 	
 	}
-	
+
+
+
 	void InfiniteBackground()
 	{
 		int decalLeft = 0;
@@ -123,7 +125,7 @@ public class startBattle : MonoBehaviour
 				v2 = new Vector3((transform.position.x - 8.5f) * -1, 0.6f, 0);
 
 			Instantiate (vilain2, v2, Quaternion.identity); 
-			yield return new WaitForSeconds(4.75f);
+			yield return new WaitForSeconds(7.75f);
 		}
 	}
 
@@ -149,7 +151,7 @@ public class startBattle : MonoBehaviour
 			Vector3	v = new Vector3(sSide, 0.6f, 0);
 			Instantiate (vilain, v, Quaternion.identity); 
 			
-			yield return new WaitForSeconds(0.35f);
+			yield return new WaitForSeconds(0.65f);
 
 			
 		}

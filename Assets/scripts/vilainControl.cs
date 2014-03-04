@@ -169,7 +169,10 @@ public class vilainControl : MonoBehaviour
 		datEject ();
 		 
 		playerControl.isStriking = false;
-		yield return new WaitForSeconds(0.85f);
+		yield return new WaitForSeconds(0.40f);
+		playerControl.playerAnimator.SetBool("strikeFirst", false);
+		playerControl.playerAnimator.SetBool("strike2", false);
+		yield return new WaitForSeconds(0.45f);
 	//	playerControl.playerAnimator.SetBool("strikeFirst", false);
 	//	playerControl.playerAnimator.SetBool("strike2", false);
 		Destroy(gameObject);

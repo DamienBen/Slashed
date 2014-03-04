@@ -76,9 +76,57 @@ public class playerControl : MonoBehaviour
 	/*	if (playerAnimator.GetBool(playerControl.strikeName))
 			transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
 		else*/
-			transform.position = new Vector3(transform.position.x, 0.8f, transform.position.z);
+			transform.position = new Vector3(transform.position.x, 1.0f, transform.position.z);
 
-		if (Input.GetKeyDown ("left") && (vilainControl.leftTrig || vilain2Control.leftTrig ))
+
+
+
+		if (Input.touchCount == 1  && (vilainControl.leftTrig || vilain2Control.leftTrig ))
+		{
+			var touch = Input.touches[0];
+			if (touch.position.x < Screen.width/2)
+			{
+				Time.timeScale = 1.0f;
+				playerControl.playerAnimator.SetBool("strikeFirst", false);
+				playerControl.playerAnimator.SetBool("strike2", false);
+				if (playerControl.strikeName == "strikeFirst")
+					playerControl.strikeName = "strike2";
+				else
+					playerControl.strikeName = "strikeFirst";
+				playerControl.isStriking = true;
+				if (_playerSide != PlayerSide.left)
+					transform.Rotate (0, 180, 0);
+				playerAnimator.SetBool(playerControl.strikeName, true);
+				_playerSide = PlayerSide.left;
+				//	rigidbody2D.AddForce(new Vector2 (-150000, 0));
+				rigidbody2D.velocity = new Vector2 (-30, 0);
+			}
+			else if (touch.position.x > Screen.width/2  && (vilainControl.leftTrig || vilain2Control.leftTrig ))
+			{
+				Time.timeScale = 1.0f;
+				playerControl.playerAnimator.SetBool("strikeFirst", false);
+				playerControl.playerAnimator.SetBool("strike2", false);
+				
+				if (playerControl.strikeName == "strikeFirst")
+					playerControl.strikeName = "strike2";
+				else
+					playerControl.strikeName = "strikeFirst";
+				playerControl.isStriking = true;
+				if (_playerSide != PlayerSide.right)
+					transform.Rotate (0, 180, 0);
+				
+				
+				transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+				playerAnimator.SetBool(playerControl.strikeName, true);
+				_playerSide = PlayerSide.right;
+				rigidbody2D.velocity = new Vector2 (30, 0);
+				//	rigidbody2D.AddForce(new Vector2 (150000, 0));
+			}
+		}
+
+
+
+		if (Input.GetKeyDown ("left")  && (vilainControl.leftTrig || vilain2Control.leftTrig ))
 		{
 			Time.timeScale = 1.0f;
 			playerControl.playerAnimator.SetBool("strikeFirst", false);
@@ -155,7 +203,7 @@ public class playerControl : MonoBehaviour
 		rigidbody2D.velocity = new Vector2 (0, 0);
 		if (playerControl.isStriking)
 		{
-			_datTimerStop = Time.realtimeSinceStartup + 0.4f;
+			_datTimerStop = Time.realtimeSinceStartup + 0.2f;
 			Shake ();
 		//	Time.timeScale = 1.0f;
 		}
